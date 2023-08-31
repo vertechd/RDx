@@ -1,0 +1,56 @@
+{
+  "platform-version": "2.3",
+  "product": {
+    "freshdesk": {
+      "location": {
+        "ticket_sidebar": {
+          "url": "index.html",
+          "icon": "styles/images/icon.svg"
+        },
+        "ticket_background": {
+          "url": "dialog_script.js"
+        }
+      },
+      "dialogs": {
+        "view_tickets": {
+          "url": "view_tickets_dialog.html",
+          "size": "medium"
+        }
+      },
+      "requests": {
+        "fetchCustomerInfo": {
+          "url": "https://api.repairdesk.co/api/web/v1/customers?email={{ticket.email}}&api_key={{settings.repairDeskApiKey}}",
+          "type": "GET"
+        },
+        "fetchTickets": {
+          "url": "https://api.repairdesk.co/api/web/v1/tickets?keyword={{ticket.email}}&api_key={{settings.repairDeskApiKey}}",
+          "type": "GET"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "data": {
+      "ticket": {
+        "read": true
+      },
+      "contact": {
+        "read": true
+      }
+    },
+    "db": {
+      "read": true,
+      "write": true
+    },
+    "request": {
+      "api": {
+        "domain": "https://api.repairdesk.co",
+        "methods": ["GET", "POST"]
+      }
+    }
+  },
+  "engines": {
+    "node": "18.17.0",
+    "fdk": "9.0.4"
+  }
+}

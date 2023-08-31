@@ -1,0 +1,22 @@
+{
+  "freshdeskApiKey": {
+    "display_name": "Freshdesk API Key",
+    "description": "Enter your Freshdesk API Key",
+    "type": "text",
+    "required": true,
+    "secure": true
+  },
+  "repairDeskApiKey": {
+    "display_name": "RepairDesk API Key",
+    "description": "Enter your RepairDesk API Key",
+    "type": "text",
+    "required": true,
+    "secure": true
+  },
+  "freshdeskDomain": {
+    "display_name": "Freshdesk Domain",
+    "description": "Enter your Freshdesk Domain (e.g., 'mycompany.freshdesk.com')",
+    "type": "text",
+    "required": true
+  }
+}
