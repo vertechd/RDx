@@ -1,20 +1,20 @@
 {
-  "getTicketsFromRepairDesk": {
+    "getTicketsFromRepairDesk": {
       "schema": {
-          "method": "GET",
-          "host": "api.repairdesk.co",
-          "path": "/api/web/v1/tickets",
-          "query": {
-              "keyword": "<%= ticket.email %>"
-          },
-          "headers": {
-              "Authorization": "Bearer <%= iparam.repairDeskApiKey %>",
-              "Content-Type": "application/json"
-          }
+        "method": "GET",
+        "host": "api.repairdesk.co",
+        "path": "/api/web/v1/tickets",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "query": {
+          "keyword": "<%= email %>",
+          "apiKey": "<%= iparam.repairDeskApiKey %>"
+        }
       },
       "options": {
-          "retryDelay": 1000,
-          "maxAttempts": 3
+        "retryDelay": 1000
       }
+    }
   }
-}
+  

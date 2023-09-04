@@ -25,6 +25,8 @@
 </head>
 <body>
 
+<h2>Tickets for <span id="requesterName">Loading...</span></h2>
+
 <table>
     <thead>
         <tr>
@@ -43,52 +45,7 @@
     </tbody>
 </table>
 
-<script>
-  // Initialize the Freshdesk SDK client
-  const clientPromise = app.initialized();
-
-  clientPromise.then(async function(client) {
-      try {
-          // Fetch the current ticket's email using Freshdesk Data API
-          const ticketData = await client.data.get('ticket');
-          if (ticketData && ticketData.ticket) {
-              const email = ticketData.ticket.email;
-
-              // Make the API call using the request template from requests.json
-              client.request.invoke('getTicketsFromRepairDesk').then(function(response) {
-                  const data = JSON.parse(response.response);
-                  populateTable(data.data.ticketData);
-              }).catch(function(error) {
-                  console.error("There was an error fetching the data:", error);
-              });
-          }
-      } catch (error) {
-          console.error("Error initializing the app:", error);
-      }
-  });
-
-  function populateTable(tickets) {
-      const tableBody = document.getElementById('apiData');
-      tickets.forEach(ticket => {
-          const customer = ticket.summary.customer;
-          ticket.devices.forEach(device => {
-              const row = document.createElement('tr');
-              row.innerHTML = `
-                  <td>${ticket.summary.order_id}</td>
-                  <td>${customer.fullName}</td>
-                  <td>${customer.email}</td>
-                  <td>${customer.mobile}</td>
-                  <td>${customer.orgonization}</td>
-                  <td>${device.repairProdItems[0].name}</td>
-                  <td>${device.status.name}</td>
-                  <td>${device.price}</td>
-              `;
-              tableBody.appendChild(row);
-          });
-      });
-  }
-</script>
-
+<script src="dialog_script.js"></script>
 
 </body>
 </html>

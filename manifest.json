@@ -8,7 +8,9 @@
           "icon": "styles/images/icon.svg"
         },
         "ticket_background": {
-          "url": "dialog_script.js"
+          "url": "dialog_script.js",
+          "event": "onExternalEvent",
+          "handler": "getTicketsFromRepairDesk"
         }
       },
       "dialogs": {
@@ -16,16 +18,15 @@
           "url": "view_tickets_dialog.html",
           "size": "medium"
         }
-      },
-      "requests": {
-        "fetchCustomerInfo": {
-          "url": "https://api.repairdesk.co/api/web/v1/customers?email={{ticket.email}}&api_key={{settings.repairDeskApiKey}}",
-          "type": "GET"
-        },
-        "fetchTickets": {
-          "url": "https://api.repairdesk.co/api/web/v1/tickets?keyword={{ticket.email}}&api_key={{settings.repairDeskApiKey}}",
-          "type": "GET"
-        }
+      }
+    }
+  },
+  "server": {
+    "location": {
+      "getTicketsFromRepairDesk": {
+        "product": "freshdesk",
+        "url": "./server/server.js",
+        "type": "onExternalEvent"
       }
     }
   },
@@ -43,14 +44,15 @@
       "write": true
     },
     "request": {
-      "api": {
-        "domain": "https://api.repairdesk.co",
-        "methods": ["GET", "POST"]
+      "getTicketsFromRepairDesk": {
       }
     }
   },
   "engines": {
     "node": "18.17.0",
     "fdk": "9.0.4"
+  },
+  "dependencies": {
+    "node-fetch": "3.3.2"
   }
 }
